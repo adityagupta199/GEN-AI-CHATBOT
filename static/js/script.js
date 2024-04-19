@@ -14,6 +14,25 @@ document.addEventListener('DOMContentLoaded', function() {
   // Event listener for toggling the side panel
   togglePanelButton.addEventListener('click', toggleSidePanel);
 
+  function adjustHeaderWidth() {
+    const sidePanelWidth = sidePanelContainer.offsetWidth;
+    const narrowWidth = 60; // Width when panel is collapsed
+    const expandedWidth = 250; // Width when panel is expanded
+    const headerPadding = 20; // Extra padding for better visibility
+
+    if (sidePanelWidth === narrowWidth) {
+      chatBotHeader.style.width = `${sidePanelWidth - headerPadding}px`;
+    } else if (sidePanelWidth === expandedWidth) {
+      chatBotHeader.style.width = `${sidePanelWidth - headerPadding}px`;
+    }
+  }
+
+  // Initial adjustment on page load
+  adjustHeaderWidth();
+
+  // Adjust header width when side panel width changes
+  sidePanelContainer.addEventListener('transitionend', adjustHeaderWidth);
+
   chatForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     // Get user input
@@ -179,6 +198,16 @@ function sortTableByColumn(table, column, asc = true) {
   }
 }
 
+function toggleSidePanel() {
+  sidePanel.classList.toggle('collapsed');
+  iconButtons.classList.toggle('hidden');
+  labelButtons.classList.toggle('hidden');
+  if (sidePanel.classList.contains('collapsed')) {
+    togglePanelButton.innerHTML = '<span class="arrow">&gt;</span>';
+  } else {
+    togglePanelButton.innerHTML = '<span class="arrow">&lt;</span>';
+  }
+}
 
 // Function to clear chat history
 function clearChatHistory() {
