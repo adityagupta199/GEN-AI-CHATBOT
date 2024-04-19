@@ -5,33 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const topQuestionsContainer = document.querySelector('.top-questions');
   const newChatButton = document.getElementById('newChatButton'); // New Chat button
   const sidePanelContainer = document.querySelector('.side-panel-container');
+  const chatbotHeader = document.querySelector('.chatbotHeader-container');
   const togglePanelButton = document.getElementById('togglePanelButton');
+  const chatwindow = document.getElementById('chatwindow-container');
+
 
   function toggleSidePanel() {
     sidePanelContainer.classList.toggle('collapsed');
+    chatbotHeader.classList.toggle('collapsed')
+    chatwindow.classList.toggle('collapsed')
   }
 
   // Event listener for toggling the side panel
   togglePanelButton.addEventListener('click', toggleSidePanel);
 
-  function adjustHeaderWidth() {
-    const sidePanelWidth = sidePanelContainer.offsetWidth;
-    const narrowWidth = 60; // Width when panel is collapsed
-    const expandedWidth = 250; // Width when panel is expanded
-    const headerPadding = 20; // Extra padding for better visibility
-
-    if (sidePanelWidth === narrowWidth) {
-      chatBotHeader.style.width = `${sidePanelWidth - headerPadding}px`;
-    } else if (sidePanelWidth === expandedWidth) {
-      chatBotHeader.style.width = `${sidePanelWidth - headerPadding}px`;
-    }
-  }
-
-  // Initial adjustment on page load
-  adjustHeaderWidth();
-
-  // Adjust header width when side panel width changes
-  sidePanelContainer.addEventListener('transitionend', adjustHeaderWidth);
 
   chatForm.addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -195,17 +182,6 @@ function sortTableByColumn(table, column, asc = true) {
   } else {
     header.classList.add("th-sort-desc");
     header.innerHTML += '<i class="fas fa-sort-down"></i> ';
-  }
-}
-
-function toggleSidePanel() {
-  sidePanel.classList.toggle('collapsed');
-  iconButtons.classList.toggle('hidden');
-  labelButtons.classList.toggle('hidden');
-  if (sidePanel.classList.contains('collapsed')) {
-    togglePanelButton.innerHTML = '<span class="arrow">&gt;</span>';
-  } else {
-    togglePanelButton.innerHTML = '<span class="arrow">&lt;</span>';
   }
 }
 
